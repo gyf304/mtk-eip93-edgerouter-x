@@ -14,6 +14,11 @@
 #include <linux/device.h>
 #include <linux/interrupt.h>
 
+#include <linux/version.h>
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 3, 0)
+#define aes_expandkey crypto_aes_expand_key
+#endif
+
 #define MTK_RING_SIZE			512
 #define MTK_RING_BUSY			32
 #define MTK_CRA_PRIORITY		1500

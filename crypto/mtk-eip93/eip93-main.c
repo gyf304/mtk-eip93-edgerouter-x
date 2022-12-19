@@ -87,11 +87,17 @@ static void mtk_unregister_algs(unsigned int i)
 
 	for (j = 0; j < i; j++) {
 		switch (mtk_algs[j]->type) {
+#if IS_ENABLED(CONFIG_CRYPTO_DEV_EIP93_SKCIPHER)
 		case MTK_ALG_TYPE_SKCIPHER:
 			crypto_unregister_skcipher(&mtk_algs[j]->alg.skcipher);
 			break;
+#endif
+#if IS_ENABLED(CONFIG_CRYPTO_DEV_EIP93_AEAD)
 		case MTK_ALG_TYPE_AEAD:
 			crypto_unregister_aead(&mtk_algs[j]->alg.aead);
+			break;
+#endif
+		default:
 			break;
 		}
 	}
@@ -106,12 +112,18 @@ static int mtk_register_algs(struct mtk_device *mtk)
 		mtk_algs[i]->mtk = mtk;
 
 		switch (mtk_algs[i]->type) {
+#if IS_ENABLED(CONFIG_CRYPTO_DEV_EIP93_SKCIPHER)
 		case MTK_ALG_TYPE_SKCIPHER:
 			err = crypto_register_skcipher(&mtk_algs[i]->alg.skcipher);
 			break;
+#endif
+#if IS_ENABLED(CONFIG_CRYPTO_DEV_EIP93_AEAD)
 		case MTK_ALG_TYPE_AEAD:
 			err = crypto_register_aead(&mtk_algs[i]->alg.aead);
 			break;
+#endif
+		default:
+			return -EINVAL;
 		}
 		if (err)
 			goto fail;

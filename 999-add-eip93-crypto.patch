@@ -1,9 +1,9 @@
 --- a/drivers/crypto/Kconfig
 +++ b/drivers/crypto/Kconfig
-@@ -13,6 +13,8 @@ if CRYPTO_HW
- 
- source "drivers/crypto/allwinner/Kconfig"
- 
+@@ -10,6 +10,8 @@
+
+ if CRYPTO_HW
+
 +source "drivers/crypto/mtk-eip93/Kconfig"
 +
  config CRYPTO_DEV_PADLOCK
@@ -11,9 +11,8 @@
  	depends on X86 && !UML
 --- a/drivers/crypto/Makefile
 +++ b/drivers/crypto/Makefile
-@@ -1,5 +1,6 @@
+@@ -1,4 +1,5 @@
  # SPDX-License-Identifier: GPL-2.0
- obj-$(CONFIG_CRYPTO_DEV_ALLWINNER) += allwinner/
 +obj-$(CONFIG_CRYPTO_DEV_EIP93) += mtk-eip93/
  obj-$(CONFIG_CRYPTO_DEV_ATMEL_AES) += atmel-aes.o
  obj-$(CONFIG_CRYPTO_DEV_ATMEL_SHA) += atmel-sha.o
