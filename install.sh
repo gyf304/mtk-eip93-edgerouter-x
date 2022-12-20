@@ -1,3 +1,5 @@
+#!/bin/bash
+
 kernel_version="4.14.54-UBNT"
 of_compatible_path="/sys/devices/platform/1e004000.crypto/of_node/compatible"
 of_compatible="mediatek,mtk-eip93"
@@ -29,3 +31,4 @@ cp "$ko_file" "/lib/modules/$kernel_version/kernel/drivers/crypto/mtk-eip93/$ko_
 chmod 644 "/lib/modules/$kernel_version/kernel/drivers/crypto/mtk-eip93/$ko_file"
 depmod -a
 modprobe "$ko_name"
+echo "Kernel module $ko_name installed"
